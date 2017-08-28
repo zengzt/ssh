@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tao.dao.TbCommodityMapper" >
+  <resultMap id="BaseResultMap" type="com.tao.TbCommodity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="commodityname" property="commodityname" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="typeid" property="typeid" jdbcType="INTEGER" />
+    <result column="pic" property="pic" jdbcType="VARCHAR" />
+    <result column="pic1" property="pic1" jdbcType="VARCHAR" />
+    <result column="pic2" property="pic2" jdbcType="VARCHAR" />
+    <result column="commodity_selling_point" property="commoditySellingPoint" jdbcType="VARCHAR" />
+    <result column="describes" property="describes" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="discount" property="discount" jdbcType="INTEGER" />
+    <result column="sendcity" property="sendcity" jdbcType="VARCHAR" />
+    <result column="frequency" property="frequency" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userid, commodityname, price, typeid, pic, pic1, pic2, commodity_selling_point, 
+    describes, number, discount, sendcity, frequency
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tao.TbCommodityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_commodity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_commodity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_commodity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tao.TbCommodityExample" >
+    delete from tb_commodity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tao.TbCommodity" >
+    insert into tb_commodity (id, userid, commodityname, 
+      price, typeid, pic, pic1, 
+      pic2, commodity_selling_point, describes, 
+      number, discount, sendcity, 
+      frequency)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{commodityname,jdbcType=VARCHAR}, 
+      #{price,jdbcType=REAL}, #{typeid,jdbcType=INTEGER}, #{pic,jdbcType=VARCHAR}, #{pic1,jdbcType=VARCHAR}, 
+      #{pic2,jdbcType=VARCHAR}, #{commoditySellingPoint,jdbcType=VARCHAR}, #{describes,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{discount,jdbcType=INTEGER}, #{sendcity,jdbcType=VARCHAR}, 
+      #{frequency,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tao.TbCommodity" >
+    insert into tb_commodity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="commodityname != null" >
+        commodityname,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="typeid != null" >
+        typeid,
+      </if>
+      <if test="pic != null" >
+        pic,
+      </if>
+      <if test="pic1 != null" >
+        pic1,
+      </if>
+      <if test="pic2 != null" >
+        pic2,
+      </if>
+      <if test="commoditySellingPoint != null" >
+        commodity_selling_point,
+      </if>
+      <if test="describes != null" >
+        describes,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="sendcity != null" >
+        sendcity,
+      </if>
+      <if test="frequency != null" >
+        frequency,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="commodityname != null" >
+        #{commodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="pic1 != null" >
+        #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null" >
+        #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="commoditySellingPoint != null" >
+        #{commoditySellingPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="describes != null" >
+        #{describes,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="sendcity != null" >
+        #{sendcity,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null" >
+        #{frequency,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tao.TbCommodityExample" resultType="java.lang.Integer" >
+    select count(*) from tb_commodity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_commodity
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodityname != null" >
+        commodityname = #{record.commodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=REAL},
+      </if>
+      <if test="record.typeid != null" >
+        typeid = #{record.typeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pic != null" >
+        pic = #{record.pic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pic1 != null" >
+        pic1 = #{record.pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pic2 != null" >
+        pic2 = #{record.pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commoditySellingPoint != null" >
+        commodity_selling_point = #{record.commoditySellingPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.describes != null" >
+        describes = #{record.describes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.discount != null" >
+        discount = #{record.discount,jdbcType=INTEGER},
+      </if>
+      <if test="record.sendcity != null" >
+        sendcity = #{record.sendcity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.frequency != null" >
+        frequency = #{record.frequency,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_commodity
+    set id = #{record.id,jdbcType=INTEGER},
+      userid = #{record.userid,jdbcType=INTEGER},
+      commodityname = #{record.commodityname,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=REAL},
+      typeid = #{record.typeid,jdbcType=INTEGER},
+      pic = #{record.pic,jdbcType=VARCHAR},
+      pic1 = #{record.pic1,jdbcType=VARCHAR},
+      pic2 = #{record.pic2,jdbcType=VARCHAR},
+      commodity_selling_point = #{record.commoditySellingPoint,jdbcType=VARCHAR},
+      describes = #{record.describes,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      discount = #{record.discount,jdbcType=INTEGER},
+      sendcity = #{record.sendcity,jdbcType=VARCHAR},
+      frequency = #{record.frequency,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tao.TbCommodity" >
+    update tb_commodity
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="commodityname != null" >
+        commodityname = #{commodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="typeid != null" >
+        typeid = #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="pic != null" >
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="pic1 != null" >
+        pic1 = #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null" >
+        pic2 = #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="commoditySellingPoint != null" >
+        commodity_selling_point = #{commoditySellingPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="describes != null" >
+        describes = #{describes,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="sendcity != null" >
+        sendcity = #{sendcity,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null" >
+        frequency = #{frequency,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tao.TbCommodity" >
+    update tb_commodity
+    set userid = #{userid,jdbcType=INTEGER},
+      commodityname = #{commodityname,jdbcType=VARCHAR},
+      price = #{price,jdbcType=REAL},
+      typeid = #{typeid,jdbcType=INTEGER},
+      pic = #{pic,jdbcType=VARCHAR},
+      pic1 = #{pic1,jdbcType=VARCHAR},
+      pic2 = #{pic2,jdbcType=VARCHAR},
+      commodity_selling_point = #{commoditySellingPoint,jdbcType=VARCHAR},
+      describes = #{describes,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      discount = #{discount,jdbcType=INTEGER},
+      sendcity = #{sendcity,jdbcType=VARCHAR},
+      frequency = #{frequency,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
