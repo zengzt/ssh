@@ -11,36 +11,40 @@
     http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
     
     <!-- 自动扫描 -->
-   
-    <!-- 数据库配置所在地 
-    <context:property-placeholder location="classpath:spring/jdbc.properties"/>
-   1.连接数据库 -->
+    <!-- 数据库配置所在地 -->
+     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+        <property name="location" value="classpath:spring/jdbc.properties" /> 
+    </bean>
+ 
+    
+  <!-- 1.连接数据库
+  <context:property-placeholder location="classpath:spring/jdbc.properties" /> 
+-->
    <bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/zhvmp" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/tb" />
 		<property name="username" value="root" />
 		<property name="password" value="" />
 	</bean>
-    
-    
-    <!-- 2.配置mybatis的sqlSessionFactory的工厂 -->
+
+    <!-- 2.配置mybatis的sqlSessionFactory的工厂  --> 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<!-- 指定mybatis全局配置文件的位置 --> 
+		<property name="configLocation" value="classpath:spring/mybatis.xml"></property> 
     	<property name="dataSource" ref="dataSource"></property>  
+    	<!--指定mybatis，mapper文件的位置  --> 
     	<property name="mapperLocations" value="classpath:com/tao/mapping/*Mapper.xml"></property>
     </bean>
     
-    <!--3.dao接口文件包-->
+    <!--3.dao接口文件包 --> 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.tao.dao"></property>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
-	
-	
-	
-	
+
    
-   	 <!--4.配置事务管理器  -->  
+   <!--4.配置事务管理器  -->  
     <bean id="transactionManager" 
     class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
         <property name="dataSource" ref="dataSource"></property>  
@@ -49,5 +53,4 @@
     <!--5.开启注解进行事务管理   transaction-manager：引用上面定义的事务管理器-->  
     <tx:annotation-driven transaction-manager="transactionManager"/>  
     
-    
- </beans>
+</beans>
