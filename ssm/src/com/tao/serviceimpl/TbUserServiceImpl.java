@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
 import com.tao.TbCommodityType;
 import com.tao.TbCommodityTypeExample;
 import com.tao.TbUser;
@@ -24,18 +25,22 @@ public class TbUserServiceImpl implements TbUserService {
 	@Override
 	public String login(TbUserExample tbuserexample) {
 		List<TbUser> user=tbusermapper.selectByExample(tbuserexample);
-		if (user==null){
-			return "error"; 
+		if (user==null || user.size() ==0){
+			System.out.println(1111);
+			return "error";
 		}
-		return null;
+		return "index";
 	}
 
 
 	@Override
 	public String register(TbUser tbuser) {
-		int i=tbusermapper.insert(tbuser);
-		System.out.println(i);
-		return null;
+		System.out.println(tbuser.getUsername());
+		int i=tbusermapper.insertSelective(tbuser);
+		if (i==0){
+			return "error";
+		}
+		return "success";
 	}
 	
 	
@@ -60,5 +65,22 @@ public class TbUserServiceImpl implements TbUserService {
 		}
 		return i;
 	}
+	
+	@Override
+	public List<TbCommodityType> test(TbCommodityTypeExample tbcommoditytypeexample) {
+		//PageHelper.startPage(1, 2);
+		List<TbCommodityType> listtct=tbcommoditytypemapper.selectByExample(tbcommoditytypeexample);
+		for (TbCommodityType b:listtct){
+			int i=b.getId();
+			System.out.println(i);
+		}
+		return listtct;
+	}
+	
+
+
+	
+	
+	
 
 }

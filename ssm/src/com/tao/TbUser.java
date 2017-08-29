@@ -23,6 +23,8 @@ public class TbUser {
 
     private Date updatedtime;
 
+    private String sendcity;
+
     public Integer getId() {
         return id;
     }
@@ -101,5 +103,13 @@ public class TbUser {
 
     public void setUpdatedtime(Date updatedtime) {
         this.updatedtime = updatedtime;
+    }
+
+    public String getSendcity() {
+        return sendcity;
+    }
+
+    public void setSendcity(String sendcity) {
+        this.sendcity = sendcity == null ? null : sendcity.trim();
     }
 }

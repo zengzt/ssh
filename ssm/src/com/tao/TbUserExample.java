@@ -801,6 +801,76 @@ public class TbUserExample {
             addCriterionForJDBCDate("updatedtime not between", value1, value2, "updatedtime");
             return (Criteria) this;
         }
+
+        public Criteria andSendcityIsNull() {
+            addCriterion("sendcity is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSendcityIsNotNull() {
+            addCriterion("sendcity is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSendcityEqualTo(String value) {
+            addCriterion("sendcity =", value, "sendcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andSendcityNotEqualTo(String value) {
+            addCriterion("sendcity <>", value, "sendcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andSendcityGreaterThan(String value) {
+            addCriterion("sendcity >", value, "sendcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andSendcityGreaterThanOrEqualTo(String value) {
+            addCriterion("sendcity >=", value, "sendcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andSendcityLessThan(String value) {
+            addCriterion("sendcity <", value, "sendcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andSendcityLessThanOrEqualTo(String value) {
+            addCriterion("sendcity <=", value, "sendcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andSendcityLike(String value) {
+            addCriterion("sendcity like", value, "sendcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andSendcityNotLike(String value) {
+            addCriterion("sendcity not like", value, "sendcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andSendcityIn(List<String> values) {
+            addCriterion("sendcity in", values, "sendcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andSendcityNotIn(List<String> values) {
+            addCriterion("sendcity not in", values, "sendcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andSendcityBetween(String value1, String value2) {
+            addCriterion("sendcity between", value1, value2, "sendcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andSendcityNotBetween(String value1, String value2) {
+            addCriterion("sendcity not between", value1, value2, "sendcity");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
